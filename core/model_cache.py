@@ -3,13 +3,14 @@
 - PURGE_EXPIRED_MODEL_CACHE_ON_START=1 and MODEL_CACHE_TTL_SECONDS=86400 (default)
   -> remove entries older than TTL
 """
-from pathlib import Path
-import os
-import json
 import hashlib
+import json
+import os
 import time
+from pathlib import Path
+from typing import Any, Dict, Optional, Tuple
+
 import joblib
-from typing import Optional, Tuple, Dict, Any
 
 MODEL_ROOT = Path(__file__).resolve().parent / "artifacts" / "models"
 MODEL_ROOT.mkdir(parents=True, exist_ok=True)

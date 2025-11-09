@@ -1,7 +1,5 @@
 """recommend.py Core module for the Telegram stock forecast bot."""
 import os
-import pandas as pd
-from typing import Optional, Tuple, List
 
 MIN_PROFIT_USD = float(os.getenv('MIN_PROFIT_USD', '0.5'))
 MIN_PROFIT_PCT = float(os.getenv('MIN_PROFIT_PCT', '0.001'))

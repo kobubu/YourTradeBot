@@ -1,12 +1,15 @@
-import pandas as pd
-import numpy as np
-import sys
 import os
+import sys
+
+import numpy as np
+import pandas as pd
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from core.data import load_ticker_history
+from datetime import datetime
+
 from core.forecast import train_select_and_forecast
-from datetime import datetime, timedelta
+
 
 def _synthetic_series(n=400, seed=42):
     rng = np.random.default_rng(seed)

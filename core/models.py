@@ -1,32 +1,33 @@
-import os
 import json
+import os
+import warnings
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
+
+import matplotlib
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from dataclasses import dataclass
-from typing import Dict, Any, Tuple, Optional, List
-
+import statsmodels.api as sm
+import tensorflow as tf
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_absolute_percentage_error, mean_squared_error
+from statsmodels.tools.sm_exceptions import ConvergenceWarning, ValueWarning
+from tensorflow import keras
 
-import warnings
-from statsmodels.tools.sm_exceptions import ValueWarning, ConvergenceWarning
+# Затем предупреждения
 warnings.filterwarnings("ignore", category=ValueWarning)
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 warnings.filterwarnings("ignore")
 
-import statsmodels.api as sm
-
-import tensorflow as tf
+# Затем GPU конфигурация
 for g in tf.config.list_physical_devices("GPU"):
     try:
         tf.config.experimental.set_memory_growth(g, True)
     except Exception:
         pass
-from tensorflow import keras
 
-import matplotlib
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 
 WF_HORIZON = int(os.getenv("WF_HORIZON", "5"))
 DISABLE_LSTM = os.getenv('DISABLE_LSTM', '0') == '1'

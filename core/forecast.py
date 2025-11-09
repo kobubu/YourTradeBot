@@ -1,16 +1,17 @@
-import io
-import os
-import json
 import hashlib
+import io
+import json
+import os
 import time
+from typing import Dict, Optional, Tuple
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from typing import Optional, Tuple, Dict
-from dataclasses import asdict
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
-import matplotlib.pyplot as plt
-from .models import select_and_fit, refit_and_forecast_30d
+from sklearn.metrics import mean_absolute_percentage_error, mean_squared_error
+
 from . import model_cache
+from .models import refit_and_forecast_30d, select_and_fit
 
 MODEL_VERSION = "v1"
 WF_HORIZON = int(os.getenv("WF_HORIZON", str(5)))
@@ -68,8 +69,10 @@ def train_select_and_forecast(df: pd.DataFrame,
                     else:
                         model_cache.remove_key(cache_key)
             except Exception:
-                try: model_cache.remove_key(cache_key)
-                except Exception: pass
+                try:
+                    model_cache.remove_key(cache_key)
+                except Exception:
+                    pass
 
         sm_res, sm_meta = model_cache.load_statsmodels_result(cache_key)
         if sm_res is not None:
@@ -87,8 +90,10 @@ def train_select_and_forecast(df: pd.DataFrame,
                     print(f"DEBUG: cache HIT (sarimax) for {ticker}, model={best_dict['name']}")
                     return best_dict, metrics, fcst_df
             except Exception:
-                try: model_cache.remove_key(cache_key)
-                except Exception: pass
+                try:
+                    model_cache.remove_key(cache_key)
+                except Exception:
+                    pass
 
         tf_model, tf_meta = model_cache.load_tf_model(cache_key)
         if tf_model is not None:
@@ -116,8 +121,10 @@ def train_select_and_forecast(df: pd.DataFrame,
                     print(f"DEBUG: cache HIT (lstm) for {ticker}, model={best_dict['name']}")
                     return best_dict, metrics, fcst_df
             except Exception:
-                try: model_cache.remove_key(cache_key)
-                except Exception: pass
+                try:
+                    model_cache.remove_key(cache_key)
+                except Exception:
+                    pass
 
         print(f"DEBUG: cache MISS for {ticker}, training from scratch")
     else:

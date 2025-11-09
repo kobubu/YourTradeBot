@@ -1,9 +1,9 @@
 import os
 import time
-import pandas as pd
-from typing import Optional, Union
 from datetime import datetime, timedelta
+from typing import Optional, Union
 
+import pandas as pd
 import yfinance as yf
 
 SAVE_CSV = os.getenv("SAVE_CSV", "0") == "1"

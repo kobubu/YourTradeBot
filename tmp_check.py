@@ -1,4 +1,5 @@
 ﻿from core.data import load_ticker_history
+
 for t in ("AAPL","META"):
     df = load_ticker_history(t)
     if df is None:

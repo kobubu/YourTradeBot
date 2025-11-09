@@ -1,13 +1,13 @@
 import os
-import io
-import asyncio
+
 from dotenv import load_dotenv
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, CallbackQueryHandler
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import ApplicationBuilder, CallbackQueryHandler, CommandHandler, ContextTypes
+
 from core.data import load_ticker_history
-from core.forecast import train_select_and_forecast, make_plot_image, export_plot_pdf
-from core.recommend import generate_recommendations
+from core.forecast import export_plot_pdf, make_plot_image, train_select_and_forecast
 from core.logging_utils import log_request
+from core.recommend import generate_recommendations
 
 load_dotenv()
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -117,7 +117,7 @@ async def forecast(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text("Не удалось загрузить данные. Проверьте тикер.")
             return
 
-        force_retrain = bool(force_retrain) if 'force_retrain' in locals() else False
+        force_retrain = False
         if len(context.args) >= 2 and context.args[1].lower() in ("retrain", "force", "fresh"):
             force_retrain = True
 
@@ -171,7 +171,8 @@ async def tickers(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for t in SUPPORTED_TICKERS:
         row.append(InlineKeyboardButton(t, callback_data=f"forecast:{t}"))
         if len(row) == 3:
-            buttons.append(row); row = []
+            buttons.append(row)
+            row = []
     if row:
         buttons.append(row)
 

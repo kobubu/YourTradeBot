@@ -1,11 +1,10 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name="yourtradebot",
     version="0.1.0",
-    packages=find_packages(include=['core', 'core.*']),  # явно указываем пакеты
+    packages=find_packages(include=['core', 'core.*']), 
     install_requires=[
-        # добавьте сюда зависимости из requirements.txt
         "pandas",
         "numpy", 
         "scikit-learn",
