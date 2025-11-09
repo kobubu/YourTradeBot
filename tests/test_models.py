@@ -1,10 +1,6 @@
 import pandas as pd
 import numpy as np
-from ..data import load_ticker_history
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
+from core.data import load_ticker_history 
 from core.forecast import train_select_and_forecast
 from datetime import datetime, timedelta
 
