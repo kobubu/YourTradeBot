@@ -1,0 +1,12 @@
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["artifacts", "logs", "docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]  # we already enforce line-length via tool
+
+[tool.pydocstyle]
+convention = "google"
+add-ignore = ["D104", "D105", "D107"]  # ignore missing package/class/magic docstrings for now

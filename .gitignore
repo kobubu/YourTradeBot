@@ -1,0 +1,76 @@
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.prod
+
+# Logs
+logs/*.log
+*.log
+
+# Artifacts and generated files
+artifacts/
+*.png
+*.pdf
+*.json
+!pyproject.toml
+!requirements.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Jupyter
+.ipynb_checkpoints
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Docker
+Dockerfile.dev
+docker-compose.override.yml
