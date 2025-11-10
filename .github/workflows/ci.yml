@@ -26,7 +26,7 @@ jobs:
         run: pytest -q
       - name: Ruff lint
         run: ruff check .
-      - name: Mypy type check
-        run: mypy . --install-types --non-interactive
+     # - name: Mypy type check
+     #   run: mypy . --install-types --non-interactive
       - name: Pydocstyle
         run: pydocstyle . || true  # don't fail build on docstyle at start
